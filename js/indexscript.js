@@ -9,7 +9,7 @@ setTimeout(()=>{
 
 body.addEventListener("click",(e)=>{
    if(e.target.id=="btn1"){
-    body.innerHTML=`<img src="./img/logo.webp" alt="logo" id="logo1"><div id="h1c"><h2>Choose Mode</h2></div><div id="option"><li><img src="./img/moon.webp" id="moon"><pre>Dark Mode</pre></li><li><img src="./img/sun.webp" id="sun"><pre>Light Mode</pre></li></div><button id ="btn2" ><a href="h.html">Continue</a></button>`;
+    body.innerHTML=`<img src="./img/logo.webp" alt="logo" id="logo1"><div id="h1c"><h2>Choose Mode</h2></div><div id="option"><li><img src="./img/moon.webp" id="moon"><pre>Dark Mode</pre></li><li><img src="./img/sun.webp" id="sun"><pre>Light Mode</pre></li></div><button id ="btn2" ><a href="option.html">Continue</a></button>`;
  document.getElementById("btn2").addEventListener("click",()=>{
  localStorage.setItem("color",JSON.stringify(color));
      window.location.assign("option.html")
