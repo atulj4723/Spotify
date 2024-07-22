@@ -1,0 +1,524 @@
+*{
+    padding:0;
+    margin:0;
+}
+html{
+    font-size:62.5%;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    background: #020202eb;
+   transition: all 1s linear 0s;
+}
+nav{
+height:10%;
+width:140%;
+margin:0 auto;
+    display:flex;
+    justify-content:space-around;
+    padding:3rem;
+    align-items:center;
+    padding-top:0.5rem;
+  
+}
+#menu{
+padding-top:4%;
+    display:flex;
+    gap:1rem;
+    padding-right:0%;
+    flex-direction:column;
+}
+#logo4{
+    transform:scale(0.7);
+    margin-left:-10%;
+}
+#search{
+margin-top:8%;
+    height: 40%;
+    transition: all 1s linear 0s;
+}
+footer{
+z-index:2;
+    position:fixed;
+    bottom:0;
+    height:5%;
+    width:100%;
+    background: #232945;
+    display:flex;
+    justify-content:space-around;
+    padding:3% 0 ;
+    & img{
+        height: 10rem;
+        width: 10rem;
+    }
+}
+
+
+#op2{
+margin-top:5%;
+    display:flex;
+    color:white;
+    width:140%;
+    font-size:4rem;
+    justify-content:space-around;
+}
+#list{
+display:flex;
+width: 144%;
+height: 38%;
+gap:3rem;
+color:white;
+padding-left:3rem;
+margin-top: 5%;
+overflow-x:scroll;
+    & div{
+     & h2{
+         font-size:5rem;
+     }
+     & h3{
+         font-size:4.8rem;
+     }
+        
+    }
+}
+#imgsec{
+height:85%;
+width: 100%;
+    position: relative;
+}
+.play{
+    position: absolute;
+    bottom:-2%;
+    right:0%;
+    transform:scale(0.6);
+    background:#0e111ceb;
+    height:15rem;
+    width: 15rem;
+    padding:4rem;
+    border-radius: 50%;
+}
+.img1{
+            height:60rem;
+            width:50rem;
+            object-fit:cover;
+            object-position:top;
+            border-radius: 5rem;
+        }
+  #playlist{
+        width:130%;
+        margin-top: 10%;
+        padding:3rem;
+            display:flex;
+            justify-content: space-between;
+            color:white;
+        }
+        #play1{
+            font-size:6rem;
+        }
+        #see{
+            font-size:5.5rem;
+            color:grey;
+            
+        }
+#home{
+    border-radius-top:2rem;
+}
+.list1{
+    width: 120%;
+    display:flex;
+   margin:10% 0;
+    justify-content: space-between;
+    align-items:center;
+    padding:0 10%;
+    
+}
+.play2{
+    height: 15rem;
+    width: 15rem;
+    background: #1f1f1f;
+    border-radius: 50%;
+    display:grid;
+    place-items:center;
+}
+#sname{
+padding-left: 8rem;
+    display:flex;
+    gap:2rem;
+    
+    flex-direction:column;
+    & h2{
+        color:white;
+        font-size:6rem;
+    }
+    & h3{
+        color:grey;
+        font-size:4rem;
+    }
+}
+.heart1,.add,.remove{
+    height: 10rem;
+    width: 10rem;
+            
+}
+#time{
+    font-size:8rem;
+    color:grey;
+}
+#df{
+    display:flex;
+    gap:7rem;
+}
+#cont{
+    display:flex;
+    align-items:center;
+}
+#searchcont{
+    width:140%;
+    display:flex;
+    justify-content:center;
+    gap:5rem;
+    transition: all 1s linear 0s;
+}
+#searchbox{
+    height:10rem;
+    width: 80rem;
+    border-radius: 5rem;
+    font-size:6rem;
+    padding:3rem;
+    transition: all 1s linear 0s;
+}
+#favoritetitle{
+width: 140%;
+display:grid;
+place-items:center;
+    color:white;
+    font-size:15rem;
+}
+#elist, #hlist,#mlist{
+    display:flex;
+width: 144%;
+height: 38%;
+gap:3rem;
+color:white;
+padding-left:5rem;
+//margin-top: 5%;
+overflow-x:scroll;
+    & div{
+     & h2{
+         font-size:5rem;
+     }
+     & h3{
+         font-size:4.8rem;
+     }
+        
+    }
+}
+#mlist{
+    padding-bottom:25rem;
+}
+#dtitle{
+    font-size:8rem;
+    padding-left:8rem;
+    margin-top: 5rem;
+    margin-botton:5rem;
+    color: white;
+}
+#space{
+    height: 15%;
+}
+#dmtitle,#stitle{
+    color:white;
+    display:grid;
+    place-items:center;
+    font-size:15rem;
+    width: 140%;
+}
+#stitle{
+    margin-top:4rem;
+}
+#timing{
+    font-size:4rem;    
+    text-align:right;
+    width:100%;
+    padding-right: 20%;
+    margin-bottom: -5%;
+}
+#contact{
+display :flex;
+align-items:center;
+    color:white;
+    justify-content:center;
+    flex-direction:column;
+    width: 145vw;
+    height: 120vh;
+    & h1{
+        font-size:15rem;
+    }
+}
+form{
+margin-top: -10%;
+    height: 78%;
+    width: 80%;
+    display:flex;
+    align-items:center;
+    padding:7rem;
+    justify-content:center;
+    flex-direction:column;
+    font-size:7rem;
+}
+#name,#email,#message{
+    height: 8%;
+    border-radius: 4rem;
+    width: 80%;
+    padding:3%;
+    font-size:6.5rem;
+}
+#message{
+    height: 15%;
+}
+
+#send{
+    height: 10%;
+    width: 50%;
+    border-radius: 5rem;
+    background: #86ff6a;
+    font-size:6.5rem;
+    margin-top: 5%;
+    font-weight:500;
+    color: white;
+}
+
+.liste{
+    color: white;
+   display:flex;
+   position:relative;
+    flex-direction:column;
+    align-items:start;
+    margin:5rem;
+    padding-bottom:5rem;
+    height: 65rem;
+    width: 100%;
+    & img {
+        height: 60rem;
+        width: 60rem;
+        object-fit:cover;
+        border-radius: 3rem;
+    }
+    & h1{
+        text-align:left;
+        font-size:7rem;
+    }
+    & h2{
+        font-size:4rem;
+        opacity:0.5;
+    }
+}
+#playlist6{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    width: 140%;
+    height: 100%;
+    padding-bottom:20rem;
+    //background: yellow;
+}
+#colplay{
+    position: absolute;
+    height: 10rem;
+    width: 10rem;
+    background: #0b0911e2;
+    padding:5rem;
+    //padding-left:2.75rem;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+}
+#hi{
+    color: white;
+}
+.lastlist{
+display:grid;
+height: 50rem;
+margin: 5rem;
+place-items:center;
+    color: white;
+    font-size:13rem;
+}
+#popup{
+    position: fixed;
+    background:white;
+    height: 40em;
+    width: 80rem;
+    display:grid;
+    top:50%;
+    left:50%;
+    background: red;
+    transform:translate(-50%,-50%);
+    place-items:center;
+    border-radius: 10rem;
+    & h1{
+        font-size:5rem;
+    }
+    & #playname{
+        height: 10rem;;
+        width: 40rem;
+        border-radius: 5rem;
+        padding-left:10%;
+        font-size:5rem;
+    }
+   
+}
+#btnsplay{
+    width: 100%;
+    display:flex;
+    justify-content:space-around;
+    & button{
+        height: 10rem;
+        width: 20rem;
+        border-radius: 5rem;
+        font-size:5rem;
+    }
+}
+.list2{
+    width: 100%;
+    display:flex;
+   //margin:10% 0;
+    justify-content: space-between;
+    //align-items:center;
+   // background: red;
+    //padding:0 10%;
+    
+}
+#favoritetitle{
+width: 140%;
+display:grid;
+place-items:center;
+    color:white;
+    font-size:15rem;
+}
+.playr{
+   
+    height: 20rem;
+    width: 20rem;
+}
+#playlist2{
+    padding-bottom:20rem;
+}
+#introimg{
+    height: 80rem;
+    width: 80rem;
+    border-radius: 10rem;
+    object-fit:cover;
+    
+}
+#intro{
+    width: 140%;
+   display:grid;
+   place-items:center;
+}
+#playthe,#addthe,#removethe{
+    width: 10rem;
+    height: 10rem;
+}
+#below{
+    display:flex;
+    width: 80%;
+    height: 20rem;
+ //   background: red;
+margin-top: 5rem;
+    align-items:center;
+    justify-content:space-between;
+}
+#playthe{
+    background: #3d3d3deb;
+    height: 10rem;
+    width: 10rem;
+    padding: 4rem;
+    border-radius: 50%;
+}
+#editsearch{
+   // background: red;
+    width: 100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    
+}
+#edits{
+    width: 80%;
+    height: 15rem;
+    border-radius: 5rem;
+    padding-left:5rem;
+    font-size:10rem;
+}
+#edb{
+    height: 15rem;
+    width: 15rem;
+}
+#playlist10,#playlist5{
+    margin-bottom:30rem;
+}
+
+#main1{
+//margin:0 5%;   
+width: 140%;
+overflow:hidden;
+transition: all 1s linear 0s;
+}
+#content6 {
+width:100%;
+border-radius: 5rem;
+height:44rem;
+margin-top: 10%;
+background: #55ff6def;
+//padding-left:10%;
+//padding:5%;
+display:flex;
+
+overflow:hidden;
+align-items:center;
+text-align:center;
+padding-bottom:0rem;
+transition: all 1s linear 0s;
+    color:white;
+    &  h1{
+    
+        font-size:4rem;
+    }
+    & h2{
+        font-size:8rem;
+    }
+    & h3{
+        font-size:6rem;
+    }
+}
+#albm{
+    height: 45rem;
+    width: 45rem;
+   // object-fit:cover;
+   // object-position:top;
+}
+#albtit{
+    width: 70%;
+}
+#favorite{
+    transition: all 4s linear 2s;
+}
+#play30{
+    position: absolute;
+    left: 65%;
+    top:60%;
+    tranform:translate(-50%,0%);
+    height: 10rem;
+    border-radius: 50%;
+    width: 10rem;
+    background: grey;
+    padding:2rem;
+}
+#addtoplay{
+position: absolute;
+   right:-30%;
+   top:61%;
+    height: 10rem;
+    width: 10rem;
+}
