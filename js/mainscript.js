@@ -9,7 +9,7 @@ let nav;
 let songs = [
   {
     id: 1,
-    path: "./img/Tere_Sang_Yaara.jpg",
+    path: "./img/Tere_Sang_Yaara.webp",
     songname: "Tere Sang Yaara",
     singer: "Atif Aslam",
     spath: "Tere Sang Yaara.mp3",
@@ -18,7 +18,7 @@ let songs = [
   },
   {
     id: 2,
-    path: "./img/Faded.jpg",
+    path: "./img/Faded.webp",
     songname: "Faded",
     singer: "Bill Eliesh",
     spath: "Faded.mp3",
@@ -27,7 +27,7 @@ let songs = [
   },
   {
     id: 3,
-    path: "./img/Vithu_Mauli_Tu.jpg",
+    path: "./img/Vithu_Mauli_Tu.webp",
     songname: "Vithu Mauli Tu",
     singer: "Atul Jadhav",
     spath: "Vithu Mauli Tu.mp3",
@@ -36,7 +36,7 @@ let songs = [
   },
   {
     id: 4,
-    path: "./img/Tera_Ban_Jaunga.jpg",
+    path: "./img/Tera_Ban_Jaunga.webp",
     songname: "Tera Ban Jaunga",
     singer: "Sujal Gatade",
     spath: "Tera Ban Jaunga.mp3",
@@ -45,7 +45,7 @@ let songs = [
   },
   {
     id: 5,
-    path: "./img/Lonely.jpg",
+    path: "./img/Lonely.webp",
     songname: "Lonely",
     singer: "sanket mane",
     spath: "Lonely.mp3",
@@ -54,7 +54,7 @@ let songs = [
   },
   {
     id: 6,
-    path: "./img/Run_Away.jpg",
+    path: "./img/Run_Away.webp",
     songname: "Run away",
     singer: "Prayas Ambawade",
     spath: "Runaway.mp3",
@@ -63,7 +63,7 @@ let songs = [
   },
   {
     id: 7,
-    path: "./img/Maan_Meri_Jaan.jpg",
+    path: "./img/Maan_Meri_Jaan.webp",
     songname: "Maan Meri Jaan",
     singer: "Prasad Mahind",
     spath: "Maan Meri Jaan.mp3",
