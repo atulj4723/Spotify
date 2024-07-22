@@ -403,6 +403,10 @@ hh.addEventListener("click", () => {
       play9.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9),rgba(0,0,0,0.9)),url("${cur.path}")`;
     }
   }
+  document.getElementById("range").addEventListener("change",(e)=>{
+      audio.currentTime=(range.value*audio.duration)/100;
+      
+  });
   style.innerHTML = `#play9{
     position: fixed;
     color:white;
