@@ -618,7 +618,7 @@ home.src="./img/home.webp";
       if (z.length != 0) {
         path = songs[z[0] - 1].path;
       } else {
-        path = "./img/Logo.webp";
+        path = "./img/logo.webp";
       }
       localStorage.setItem("imgpath", path);
       const div = document.createElement("div");
