@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <link rel="stylesheet" href="./css/mainstyle.css">
+</head>
+<body>  
+    <nav id="nav">
+        
+    </nav>
+    <main id="main">
+        </main>    
+        <div id="space"></div>
+        <div id="play9">
+            <img src="./img/left.webp" alt="" id="back">
+            <h1 id="tt">Playing</h1>
+            <div id="hh">
+                <img src="./img/bg1.webp" alt="" id="playimg">
+                <div id="playingnow">
+                    <h1 id="playingnows">Tere sang yara</h1>
+                    <h2 id="playingsongs">Afhirvj hffhj</h2>
+                 </div>
+            </div>
+            <h3 id="timing"></h3>
+            <input type="range" value=0 max=100 id="range">
+            <div id="buttons">
+                <img src="./img/previous.webp" alt="" class="btn1">
+                <img src="./img/play.webp" alt="" id="play10" class="btn2">
+                <img src="./img/next.webp" alt="" class="btn3">
+             </div>
+        </div>
+    <footer>        
+        <img src="./img/fhome.webp" alt="home" id="home">
+        <img src="./img/discover.webp" alt="discover" id="discover">
+        <img src="./img/playlist.webp" alt="heart" id="favorite">
+        <img src="./img/profile.webp" alt="profile" id="profile">
+    </footer>
+    <style id="style">
+    #play9{
+        display:flex;
+        position:fixed;
+        bottom:8%;
+        justify-content:space-between;
+        height:10%;
+        align-items:center;
+        width:100%;
+        padding-left:3%;
+        background:#85ff40;
+        transition: all 0.5s linear 0s;
+    }
+    #range{
+        display:none;
+    }
+    #playimg{
+        height:17rem;
+        border-radius:50%;
+        width:17rem;
+        animation:rotate 4s linear infinite;
+    }
+    #back, #tt{
+        display:none;
+    }
+    #timing{
+        display:none
+    }
+    #hh{
+        display:flex;
+        align-items:center;
+        gap:3%;
+        width:60%;
+    }
+    @keyframes rotate{
+        100%{
+            rotate:-360deg;
+        }
+        
+    }
+    #playingnow{
+        font-size:3rem;
+        color:white;
+        
+    }
+    #buttons{
+        height:100%;
+        display:flex;.
+        width:40%;
+        justify-content:space-evenly;
+        align-items:center;
+        padding-right:2%;
+    }
+    .btn1,.btn2,.btn3{
+        height:15rem;
+        width:15rem;
+    }
+    </style>
+   
+    <script src="./js/mainscript.js" ></script>
+    <script>
+        //localStorage.setItem("current",JSON.stringify(""));
+    </script>
+    <style id="albsty">
+        
+    </style>
+</body>
+</html>
