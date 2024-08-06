@@ -9,7 +9,7 @@ body{
     width: 100vw;
     height: 100vh;
     background: #020202eb;
-   transition: all 1s linear 0s;
+
 }
 nav{
 height:10%;
@@ -20,7 +20,7 @@ margin:0 auto;
     padding:3rem;
     align-items:center;
     padding-top:0.5rem;
-  
+
 }
 #menu{
 padding-top:4%;
@@ -36,7 +36,7 @@ padding-top:4%;
 #search{
 margin-top:8%;
     height: 40%;
-    transition: all 1s linear 0s;
+
 }
 footer{
 z-index:2;
@@ -79,7 +79,7 @@ overflow-x:scroll;
      & h3{
          font-size:4.8rem;
      }
-        
+
     }
 }
 #imgsec{
@@ -87,17 +87,19 @@ height:85%;
 width: 100%;
     position: relative;
 }
-.play{
+#play88{
     position: absolute;
     bottom:-2%;
     right:0%;
-    transform:scale(0.6);
-    background:#0e111ceb;
+   // transform:scale(0.6);
+    //background:#0e111ceb;
     height:15rem;
     width: 15rem;
-    padding:4rem;
-    border-radius: 50%;
+
+    //padding:4rem;
+   // border-radius: 50%;
 }
+
 .img1{
             height:60rem;
             width:50rem;
@@ -119,11 +121,8 @@ width: 100%;
         #see{
             font-size:5.5rem;
             color:grey;
-            
+
         }
-#home{
-    border-radius-top:2rem;
-}
 .list1{
     width: 120%;
     display:flex;
@@ -131,9 +130,9 @@ width: 100%;
     justify-content: space-between;
     align-items:center;
     padding:0 10%;
-    
+
 }
-.play2{
+.play2,#play88{
     height: 15rem;
     width: 15rem;
     background: #1f1f1f;
@@ -145,7 +144,6 @@ width: 100%;
 padding-left: 8rem;
     display:flex;
     gap:2rem;
-    
     flex-direction:column;
     & h2{
         color:white;
@@ -159,7 +157,7 @@ padding-left: 8rem;
 .heart1,.add,.remove{
     height: 10rem;
     width: 10rem;
-            
+
 }
 #time{
     font-size:8rem;
@@ -178,7 +176,6 @@ padding-left: 8rem;
     display:flex;
     justify-content:center;
     gap:5rem;
-    transition: all 1s linear 0s;
 }
 #searchbox{
     height:10rem;
@@ -186,7 +183,6 @@ padding-left: 8rem;
     border-radius: 5rem;
     font-size:6rem;
     padding:3rem;
-    transition: all 1s linear 0s;
 }
 #favoritetitle{
 width: 140%;
@@ -202,7 +198,6 @@ height: 38%;
 gap:3rem;
 color:white;
 padding-left:5rem;
-//margin-top: 5%;
 overflow-x:scroll;
     & div{
      & h2{
@@ -211,7 +206,7 @@ overflow-x:scroll;
      & h3{
          font-size:4.8rem;
      }
-        
+
     }
 }
 #mlist{
@@ -221,7 +216,7 @@ overflow-x:scroll;
     font-size:8rem;
     padding-left:8rem;
     margin-top: 5rem;
-    margin-botton:5rem;
+    margin-bottom:5rem;
     color: white;
 }
 #space{
@@ -239,10 +234,16 @@ overflow-x:scroll;
 }
 #timing{
     font-size:4rem;    
-    text-align:right;
+    //text-align:right;
     width:100%;
-    padding-right: 20%;
+   display:flex;
+   justify-content:center;
+   gap:60%;
+    //padding-right: 20%;
     margin-bottom: -5%;
+    & div{
+        font-size:5rem;
+    }
 }
 #contact{
 display :flex;
@@ -263,19 +264,20 @@ margin-top: -10%;
     display:flex;
     align-items:center;
     padding:7rem;
+    gap:5rem;
     justify-content:center;
     flex-direction:column;
-    font-size:7rem;
+    font-size:5rem;
 }
 #name,#email,#message{
-    height: 8%;
+    height: 5%;
     border-radius: 4rem;
     width: 80%;
     padding:3%;
     font-size:6.5rem;
 }
 #message{
-    height: 15%;
+    height: 10%;
 }
 
 #send{
@@ -320,18 +322,16 @@ margin-top: -10%;
     width: 140%;
     height: 100%;
     padding-bottom:20rem;
-    //background: yellow;
 }
 #colplay{
     position: absolute;
     height: 10rem;
     width: 10rem;
     background: #0b0911e2;
-    padding:5rem;
-    //padding-left:2.75rem;
-    bottom: 0;
+   padding:3rem;
+    bottom: 15%;
     right: 0;
-    border-radius: 50%;
+   border-radius: 50%;
 }
 #hi{
     color: white;
@@ -347,12 +347,13 @@ place-items:center;
 #popup{
     position: fixed;
     background:white;
+    box-shadow:2rem 2rem 2rem 2rem black;
     height: 40em;
     width: 80rem;
     display:grid;
     top:50%;
     left:50%;
-    background: red;
+
     transform:translate(-50%,-50%);
     place-items:center;
     border-radius: 10rem;
@@ -366,7 +367,7 @@ place-items:center;
         padding-left:10%;
         font-size:5rem;
     }
-   
+
 }
 #btnsplay{
     width: 100%;
@@ -382,12 +383,9 @@ place-items:center;
 .list2{
     width: 100%;
     display:flex;
-   //margin:10% 0;
     justify-content: space-between;
-    //align-items:center;
-   // background: red;
-    //padding:0 10%;
-    
+
+
 }
 #favoritetitle{
 width: 140%;
@@ -397,7 +395,7 @@ place-items:center;
     font-size:15rem;
 }
 .playr{
-   
+
     height: 20rem;
     width: 20rem;
 }
@@ -409,7 +407,7 @@ place-items:center;
     width: 80rem;
     border-radius: 10rem;
     object-fit:cover;
-    
+
 }
 #intro{
     width: 140%;
@@ -424,7 +422,6 @@ place-items:center;
     display:flex;
     width: 80%;
     height: 20rem;
- //   background: red;
 margin-top: 5rem;
     align-items:center;
     justify-content:space-between;
@@ -437,12 +434,11 @@ margin-top: 5rem;
     border-radius: 50%;
 }
 #editsearch{
-   // background: red;
-    width: 100%;
+      width: 100%;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    
+
 }
 #edits{
     width: 80%;
@@ -460,10 +456,10 @@ margin-top: 5rem;
 }
 
 #main1{
-//margin:0 5%;   
+
 width: 140%;
 overflow:hidden;
-transition: all 1s linear 0s;
+
 }
 #content6 {
 width:100%;
@@ -471,18 +467,17 @@ border-radius: 5rem;
 height:44rem;
 margin-top: 10%;
 background: #55ff6def;
-//padding-left:10%;
-//padding:5%;
+
 display:flex;
 
 overflow:hidden;
 align-items:center;
 text-align:center;
 padding-bottom:0rem;
-transition: all 1s linear 0s;
+
     color:white;
     &  h1{
-    
+
         font-size:4rem;
     }
     & h2{
@@ -495,20 +490,16 @@ transition: all 1s linear 0s;
 #albm{
     height: 45rem;
     width: 45rem;
-   // object-fit:cover;
-   // object-position:top;
 }
 #albtit{
     width: 70%;
 }
-#favorite{
-    transition: all 4s linear 2s;
-}
+
 #play30{
     position: absolute;
     left: 65%;
     top:60%;
-    tranform:translate(-50%,0%);
+    transform:translate(-50%,0%);
     height: 10rem;
     border-radius: 50%;
     width: 10rem;
@@ -522,3 +513,69 @@ position: absolute;
     height: 10rem;
     width: 10rem;
 }
+#search1{
+    height:15rem;
+}
+#profile_content{
+width: 140vw;
+height: 100%;
+color:white;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2rem;
+    justify-content:center;
+}
+#developer{
+    color:#ffffff8a;
+    font-size:10rem;
+    width: 140%;
+    text-align:center;
+
+}
+#user_name{
+    font-size:15rem;
+}
+#user_email{
+    font-size:5rem;
+}
+#Signout{
+    font-size:10rem;
+
+    background: #86ff6a;
+    color:white;
+    border-radius: 5rem;
+    height: 20rem;
+    width: 50rem;
+}
+#theme1{
+   background: grey;
+   border-radius: 50%;
+   position: absolute;
+   top:0;
+   right:0;
+   & img{
+       height: 100%;
+       width: 100%;
+   }
+
+    height: 20rem;
+    width: 20rem;
+}
+ .btn1,.btn2,.btn3{
+        height:20rem;
+        width:20rem;
+        border-radius: 50%;
+    }
+    #profile_picture{
+      height: 30rem;
+      width: 30rem;
+        border-radius: 50%;
+    }
+    #profile_content{
+        position:relative;
+    }
+    #show{
+        height: 90rem;
+        width: 90rem;
+    }
