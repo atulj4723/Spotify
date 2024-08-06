@@ -1,4 +1,163 @@
 let list1;
+let inp=JSON.parse(localStorage.getItem("user-info"))|| "";
+if(inp==""){
+    //if no user logged in then go to sign in page
+    window.location.assign("index.html");
+}
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getDatabase, set, ref, get, child} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+const firebaseConfig = {
+    apiKey: "AIzaSyDBq87GBZd6hJ5c-RblvFMDKtVZDE0kHPw",
+    authDomain: "beat-db665.firebaseapp.com",
+    projectId: "beat-db665",
+    storageBucket: "beat-db665.appspot.com",
+    messagingSenderId: "242039199221",
+    appId: "1:242039199221:web:457724ce73befdb0577cbc",
+    measurementId: "G-EL59F3N0BX"
+  };
+  const app = initializeApp(firebaseConfig);
+  const db=getDatabase();
+const dbRef = ref(getDatabase());
+let user;
+let name;
+//localStorage.clear();
+get(child(dbRef, "UsersAuthList/" + inp)).then((snapshot) => {
+  if (snapshot.exists) {
+    user=snapshot.val();
+    load_data(user);
+    console.log(user.name);
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+let user_c;
+const update_data=()=>{
+    let col=JSON.parse(localStorage.getItem("collection"));
+let col1={};
+for (let cur of col){
+    col1[cur]=JSON.parse(localStorage.getItem(cur));
+}
+let obj2=JSON.stringify(col1);
+const obj1={
+    name: user.name, 
+    email: user.email, 
+    profile_picture:user.profile_picture,
+    collection: obj2, 
+    
+}
+set(ref(db, 'UsersAuthList/' + inp),obj1) ;
+}
+let next;
+const load_data=(user_c)=>{
+    let user_inf=JSON.parse(user_c.collection) ;
+    let collection2=Object.entries(user_inf);
+    let collection1=Object.keys(user_inf);
+  localStorage.setItem("collection",JSON.stringify(collection1));
+    for(let cur of collection2){
+        localStorage.setItem(cur[0],JSON.stringify(cur[1]));
+    }
+}
+
+
+console.log(inp);
+let userId=inp;
+
+
+//choose color for theme
+let color1= JSON.parse(localStorage.getItem("color"))|| "black";
+let searchimg="./img/search.webp";
+let circleimg="./img/circle.webp";
+let addimg="./img/add.webp";
+let faddimg="./img/fadd.webp";
+let imgt="add.webp";
+let removeimg="./img/remove.webp";
+let fremove="./img/fremove.webp";
+let imgt2="remove.webp";
+let heartimg="heart.webp";
+// do changes according to theme color
+const theme1=(color2)=>{
+if(color2=="white"){
+//changes img color from white to black
+    searchimg="./img/bsearch.webp";
+    addimg="./img/badd.webp";
+    imgt2="bremove.webp";
+    heartimg="bheart.webp";
+    fremove="./img/bfremove.webp";
+    removeimg="./img/bremove.webp";
+    faddimg="./img/bfadd.webp";
+    imgt="badd.webp";
+    circleimg="./img/bcircle.webp";
+    let theme=document.getElementById("theme")
+    //change text color
+    theme.innerHTML=`#body{background:white;}
+    #stitle{
+        color:black;
+    }
+    #sname{
+        & h2{
+            color:black;
+        }
+    }
+    #contact{
+        color:black;
+    }
+    .child{
+        & h2{
+            color:black;
+        }
+        & h3{
+            color:black;
+        }
+    }
+    #see{
+        color:transparent;
+    }
+    #play1,#dtitle,#dmtitle,#albname{
+        color:black;
+    }
+    #favoritetitle{
+        color:black;
+    }
+    .liste{
+        & h1{
+            color:black;
+        }
+        & h2{
+            color:black;
+        }
+    }
+    .lastlist{
+        & h1{
+            color:black;
+        }
+    }
+   #user_name,#user_email{
+        color:black;
+    }
+    #developer{
+        color:grey;
+    }
+    `;
+}
+else{
+    searchimg="./img/search.webp";
+    addimg="./img/add.webp";
+    imgt2="remove.webp";
+    heartimg="heart.webp";
+    fremove="./img/fremove.webp";
+    removeimg="./img/remove.webp";
+    faddimg="./img/fadd.webp";
+    imgt="add.webp";
+    circleimg="./img/circle.webp";
+    let theme=document.getElementById("theme")
+    //change text color
+    theme.innerHTML="";
+}}
+theme1(color1);
+//declare all required variables
 let playlist2;
 let fav = "";
 let favorite;
@@ -6,6 +165,7 @@ let Favorite;
 let main;
 let home;
 let nav;
+//declare array of objects to for search easily
 let songs = [
   {
     id: 1,
@@ -71,50 +231,56 @@ let songs = [
     language: "english",
   },
 ];
+
 let list3 = [];
-let newpa = [5, 3, 2,4];
+let newpa = [5, 3, 2,4];//list for new album
 const load1 = () => {
   return JSON.parse(localStorage.getItem("Favorite"));
 };
-let fav1 = load1() || [];
+let fav1 = load1() || [];//loads favorite content from storage
 let collection = JSON.parse(localStorage.getItem("collection")) || [
     "Favorite",
-  ];
+  ];//load collection content from storage
   localStorage.setItem("collection", JSON.stringify(collection));
 localStorage.setItem("Favorite", JSON.stringify(fav1));
+//increase album view by clicking on albm title
 function newalb1() {
   let main1 = document.getElementById("main1");
   main1.innerHTML = `<div id="content6"><div id="albtit"><h2 id="albname">Happier Than Ever</h2></div><div id="albimg"><img src="${
     songs[newpa[0] - 1].path
-  }" id="albm"></div></div><img src="./img/play.webp" id="play30" data-spath="${songs[newpa[0]-1].spath}"><img src="./img/add.webp" id="addtoplay" data-play="${JSON.stringify(newpa)}"><div id="playlist50"></div>`;
+  }" id="albm"></div></div><img src="./img/play.webp" id="play30" data-spath="${songs[newpa[0]-1].spath}"><img src="${addimg}" id="addtoplay" data-play="${JSON.stringify(newpa)}"><div id="playlist50"></div>`;
   let playlist2 = document.getElementById("playlist50");
+  //adding list songs to playlist 50
   for(let cur1 of newpa){
   for (let cur of songs) {
-    if (cur1==cur.id) {
+    if (cur1==cur.id) {//checking does song include in favorite list
       if (fav1.includes(`${cur.id}`)) {
         fav = "liked.webp";
       } else {
-        fav = "heart.webp";
+        fav = heartimg;
       }
       const div = document.createElement("div");
       div.classList.add("list1");
+      //structure of song display
       div.innerHTML = `<div id="cont"><div class="play2" id="${cur.id}"class="playing" data-spath="${cur.spath}"><img src="./img/play.webp" class="playing" id="${cur.id}" data-spath="${cur.spath}"></div><div id="sname"><h2>${cur.songname}</h2><h3>${cur.singer}</h3></div></div><div id="df"><div id="time">${cur.time}</div><div id="img8" ><img src="./img/${fav}" alt="${cur.alt}" id="${cur.id}" class="heart1"></div></div>`;
       playlist2.append(div);
-      list4.push(cur.spath);
+      list4.push(cur.spath);//to play next or previous song
     }
   }}
-  document.getElementById("play30").addEventListener("click",(e)=>{
+  document.getElementById("play30").addEventListener("click",(e)=>{//add current song play
      player(e.target.getAttribute("data-spath"),list4);
   });
-  document.getElementById("addtoplay").addEventListener("click",()=>{
+  document.getElementById("addtoplay").addEventListener("click",()=>{ //addingalbm to collection
       let text=document.getElementById("albname").innerText;
      collection.push(text);
+     addtoplay.src=`${faddimg}`;
      collection=[... new Set(collection)];
      let listcont=document.getElementById("addtoplay").getAttribute("data-play");
-     console.log(listcont);
+   //storing alb name and contains
      localStorage.setItem(text,listcont);
   localStorage.setItem("collection", JSON.stringify(collection));
   });
+  //function to add song in list to favorite list
   addfav("playlist50", list4);
   document.getElementById("albsty").innerHTML = `#content6 {
             display:flex;
@@ -136,6 +302,7 @@ function newalb1() {
         }
         `;
 }
+//view of alb before clicking
 function newalb() {
   let list25 = [1, 5, 8];
   let main1 = document.getElementById("main1");
@@ -147,11 +314,12 @@ function newalb() {
     newalb1();
   });
 }
+//function to display content of home page
 function load() {
   fav1 = load1() || [];
   nav = document.getElementById("nav");
   main = document.getElementById("main");
-  nav.innerHTML = `<img src="./img/search.webp" alt="search" id="search"><img src="./img/logo.webp" alt="logo" id="logo4"><div id="menu"><img src="./img/circle.webp" alt="circle"><img src="./img/circle.webp" alt="circle"><img src="./img/circle.webp" alt="circle"></div>`;
+  nav.innerHTML = `<img src="${searchimg}" alt="search" id="search"><img src="./img/logo.webp" alt="logo" id="logo4"><div id="menu"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"></div>`;
   main.innerHTML = `<div id="main1"></div><div id="list"></div><div id="playlist"><h2 id="play1">Playlist</h2><h3 id="see">See More</h3></div><div id="playlist2"></div>`;
   newalb();
   list1 = document.getElementById("list");
@@ -160,16 +328,16 @@ function load() {
   for (let cur of songs) {
     const div = document.createElement("div");
     div.classList.add("child");
-    div.innerHTML = `<div id="imgsec"><img src=${cur.path} alt="${cur.path}" id="play8" class="playing img1" data-spath="${cur.spath}"><img src="./img/play.webp" alt="${cur.songname}" id="play8" class="playing play " data-spath="${cur.spath}"></div><h2>${cur.songname}</h2><h3>${cur.singer}</h3>`;
+    div.innerHTML = `<div id="imgsec"><img src=${cur.path} alt="${cur.path}" id="play8" class="playing img1" data-spath="${cur.spath}"><div id="play88"><img src="./img/play.webp" alt="${cur.songname}" id="play8" class="playing play " data-spath="${cur.spath}"></div></div><h2>${cur.songname}</h2><h3>${cur.singer}</h3>`;
     list1.append(div);
     list2.push(cur.spath);
   }
-  let list3 = [];
+  let list3 = [];//add current list song id for next previous 
   for (let cur of songs) {
     if (fav1.includes(`${cur.id}`)) {
       fav = "liked.webp";
     } else {
-      fav = "heart.webp";
+      fav = heartimg;
     }
     const div = document.createElement("div");
     div.classList.add("list1");
@@ -183,10 +351,11 @@ function load() {
 load();
 home = document.getElementById("home");
 home.addEventListener("click", () => {
+//change icon color after clicking
 discover.src="./img/discover.webp";
 home.src="./img/fhome.webp";
 favorite.src="./img/playlist.webp";
-
+profile.src="./img/profile.webp";
   load();
   searchs();
   menu();
@@ -194,6 +363,7 @@ favorite.src="./img/playlist.webp";
 });
 let input;
 let curlist;
+//function to add or remove song to favorite or play song 
 function addfav(input, curlist) {
   playlist2 = document.getElementById(input);
   playlist2.addEventListener("click", (e) => {
@@ -211,43 +381,50 @@ function addfav(input, curlist) {
         fav1 = [...new Set(fav1)];
         localStorage.setItem("Favorite", JSON.stringify(fav1));
       }
+      update_data();
     } else if (e.target.className == "playing") {
       player(e.target.getAttribute("data-spath"), curlist);
     } else if (e.target.id == "play8") {
       player(e.target.getAttribute("data-spath"), curlist);
     }
   });
+  
 }
 let path;
+//set current playing song name to player
+let ccc=JSON.parse(localStorage.getItem("current"))|| " Tere Sang Yaara.mp3";
 let playingnows = document.getElementById("playingnows");
-playingnows.innerText = JSON.parse(localStorage.getItem("current"));
+playingnows.innerText=ccc;
 for(let cur of songs){
-    if(cur.spath==JSON.parse(localStorage.getItem("current"))){
+    if(cur.spath==ccc){
        let play9=document.getElementById("play9"); play9.style.backgroundImage=`linear-gradient( to top, rgba(0,0,0,0.9),rgba(255,255,255,0.9)),url("${cur.path}")`;
        document.getElementById("playimg").src=cur.path;
-       document.getElementById("playingsongs").innerText=cur.singer;
+    document.getElementById("playingsongs").innerText=cur.singer;
     }
 }
-let audio = new Audio(`./song/${JSON.parse(localStorage.getItem("current"))}`);
+   let t="Tere Sang Yaara.mp3";
+let audio = new Audio(`./song/${JSON.parse(localStorage.getItem("current"))|| t}`);
 let curlist1;
 function player(path, curlist1) {
-  let path1 = JSON.parse(localStorage.getItem("current"));
+  let path1 = JSON.parse(localStorage.getItem("current"))|| "";
   let count = JSON.parse(localStorage.getItem("count"));
   let play10 = document.getElementById("play10");
   if (path == path1) {
+  //count used to pause or play song and change the page content accordingly
+  let pc=document.getElementById("pc");
     if (count == 1) {
       audio.pause();
       count = 0;
-      play10.src = "./img/play.webp";
-      //clearInterval(inter);
+      pc.src = "./img/play.webp";
     } else {
       audio.play();
-      play10.src = "./img/pause.webp";
+      pc.src = "./img/pause.webp";
       count = 1;
+      // check progress of song if it is greater than 99 then plays next song
       const inter = setInterval(() => {
         let range = document.getElementById("range");
-        if (range.value > 99) {
-          let playslist = JSON.parse(localStorage.getItem("curplay"));
+        if (range.value > 99999) {
+       let playslist=JSON.parse(localStorage.getItem("curplay"))|| "";
           let playnows = document.getElementById("playingnows");
           if (
             playslist.length - 1 >
@@ -267,16 +444,16 @@ function player(path, curlist1) {
     audio.play();
     play10.src = "./img/pause.webp";
     count = 1;
-    audio.currentTime = 20;
     localStorage.setItem("current", JSON.stringify(path));
     let playingnows = document.getElementById("playingnows");
     let playingsongs = document.getElementById("playingsongs");
     playingnows.innerText = path;
-
+   
     localStorage.setItem("curplay", JSON.stringify(curlist1));
     for (let cur of songs) {
       if (cur.spath == path) {
         playingsongs.innerHTML = cur.singer;
+       
         document.getElementById("playimg").src = cur.path;
       }
     }
@@ -285,29 +462,13 @@ function player(path, curlist1) {
   let play9 = document.getElementById("play9");
   for (let cur of songs) {
     if (document.getElementById("playingnows").innerText == cur.spath) {
-      play9.style.backgroundImage = `linear-gradient(to top,rgba(0,0,0,0.9),rgba(255,255,255,0.9)),url("${cur.path}")`;
+ 
+    
+    play9.style.backgroundImage = `linear-gradient(to top,rgba(0,0,0,0.9),rgba(255,255,255,0.9)),url("${cur.path}")`;
     }
   }
 }
-/*
-favorite=document.getElementById("favorite");
-favorite.addEventListener("click",()=>{
-let list4=[];
-main.innerHTML=`<div id="favoritetitle">Favorite</div><div id="playlist5"></div><div id="collection"></div>`;
-playlist2=document.getElementById("playlist5");
-    for (let cur of songs){
-if(fav1.includes(`${cur.id}`)){
-      fav="liked.webp";
-    const div=document.createElement("div");
-    div.classList.add("list1");
-    div.innerHTML=`<div id="cont"><div class="play2" id="${cur.id}"class="playing" data-spath="${cur.spath}"><img src="./img/play.webp" class="playing" id="${cur.id}" data-spath="${cur.spath}"></div><div id="sname"><h2>${cur.songname}</h2><h3>${cur.singer}</h3></div></div><div id="df"><div id="time">${cur.time}</div><div id="img8" ><img src="./img/${fav}" alt="${cur.alt}" id="${cur.id}" class="heart1"></div></div>`;
-    
-    playlist2.append(div);
-    list4.push(cur.spath);
-    
-}
-    }addfav("playlist5",list4);searchs();menu();
-});*/
+//lists to store discover categories song id to play next
 let list5 = [];
 let list6 = [];
 let list7 = [];
@@ -316,34 +477,38 @@ discover.addEventListener("click", () => {
 discover.src="./img/fdiscover.webp";
 home.src="./img/home.webp";
 favorite.src="./img/playlist.webp";
-
+profile.src="./img/profile.webp";
+nav.innerHTML = `<img src="${searchimg}" alt="search" id="search"><img src="./img/logo.webp" alt="logo" id="logo4"><div id="menu"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"></div>`;
+searchs();
+menu();
   main.innerHTML = `<div id="dmtitle">Discover</div><div id="dtitle">Engilsh</div><div id="elist"></div><div id="dtitle">Hindi</div><div id="hlist"></div><div id="dtitle">Marathi</div><div id="mlist"></div>`;
   let elist = document.getElementById("elist");
   let hlist = document.getElementById("hlist");
   let mlist = document.getElementById("mlist");
   for (let cur of songs) {
+  //only show English songs
     if (cur.language == "english") {
       const div = document.createElement("div");
       div.classList.add("child");
-      div.innerHTML = `<div id="imgsec"><img src=${cur.path} alt="${cur.path}" id="play8" class="playing img1" data-spath="${cur.spath}"><img src="./img/play.webp" alt="${cur.songname}" id="play8" class="playing play " data-spath="${cur.spath}"></div><h2>${cur.songname}</h2><h3>${cur.singer}</h3>`;
+      div.innerHTML = `<div id="imgsec"><img src=${cur.path} alt="${cur.path}" id="play8" class="playing img1" data-spath="${cur.spath}"><div id="play88"><img src="./img/play.webp" alt="${cur.songname}" id="play8" class="playing play " data-spath="${cur.spath}"></div></div><h2>${cur.songname}</h2><h3>${cur.singer}</h3>`;
       elist.append(div);
       list5.push(cur.spath);
     }
-  }
+  }//hindi
   for (let cur of songs) {
     if (cur.language == "hindi") {
       const div = document.createElement("div");
       div.classList.add("child");
-      div.innerHTML = `<div id="imgsec"><img src=${cur.path} alt="${cur.path}" id="play8" class="playing img1" data-spath="${cur.spath}"><img src="./img/play.webp" alt="${cur.songname}" id="play8" class="playing play " data-spath="${cur.spath}"></div><h2>${cur.songname}</h2><h3>${cur.singer}</h3>`;
+      div.innerHTML = `<div id="imgsec"><img src=${cur.path} alt="${cur.path}" id="play8" class="playing img1" data-spath="${cur.spath}"><div id="play88"><img src="./img/play.webp" alt="${cur.songname}" id="play8" class="playing play " data-spath="${cur.spath}"></div></div><h2>${cur.songname}</h2><h3>${cur.singer}</h3>`;
       hlist.append(div);
       list6.push(cur.spath);
     }
-  }
+  }//marathi
   for (let cur of songs) {
     if (cur.language == "marathi") {
       const div = document.createElement("div");
       div.classList.add("child");
-      div.innerHTML = `<div id="imgsec"><img src=${cur.path} alt="${cur.path}" id="play8" class="playing img1" data-spath="${cur.spath}"><img src="./img/play.webp" alt="${cur.songname}" id="play8" class="playing play " data-spath="${cur.spath}"></div><h2>${cur.songname}</h2><h3>${cur.singer}</h3>`;
+      div.innerHTML = `<div id="imgsec"><img src=${cur.path} alt="${cur.path}" id="play8" class="playing img1" data-spath="${cur.spath}"><div id="play88"><img src="./img/play.webp" alt="${cur.songname}" id="play8" class="playing play " data-spath="${cur.spath}"></div></div><h2>${cur.songname}</h2><h3>${cur.singer}</h3>`;
       mlist.append(div);
       list7.push(cur.spath);
     }
@@ -354,29 +519,29 @@ favorite.src="./img/playlist.webp";
   searchs();
   menu();
 });
+//function to search songs
 function searchs() {
   let list8 = [];
-
   let search = document.getElementById("search");
-  //let nav=document.getElementById("nav");
   search.addEventListener("click", () => {
-    //nav.innerHTML="";
-    main.innerHTML = `<div id="stitle">Search</div><div id="searchcont"><input type="text" id="searchbox"><img src="./img/search.webp" alt="search" id="search1"></div><div id="searchresult"></div>`;
+  //change main content to search page
+    main.innerHTML = `<div id="stitle">Search</div><div id="searchcont"><input type="text" id="searchbox"><img src="${searchimg}" alt="search" id="search1"></div><div id="searchresult"></div>`;
     let searchbox = document.getElementById("searchbox");
     const handle = (event) => {
       let searchresult = document.querySelector("#searchresult");
       searchresult.innerHTML = "";
       for (let cur of songs) {
+      //check input value should not be null
         if (`${searchbox.value}` != "") {
           if (
             `${cur.songname.toLowerCase()}`.includes(
               `${searchbox.value.toLowerCase()}`
-            )
-          ) {
+            )//check the song array contains searched letters
+          ) {//show only search content
             if (fav1.includes(`${cur.id}`)) {
               fav = "liked.webp";
             } else {
-              fav = "heart.webp";
+              fav = heartimg;
             }
             const div = document.createElement("div");
             div.classList.add("list1");
@@ -396,6 +561,7 @@ searchs();
 menu();
 let style = document.getElementById("style");
 let hh = document.getElementById("hh");
+//increaseplayer size
 hh.addEventListener("click", () => {
   let play9 = document.getElementById("play9");
   for (let cur of songs) {
@@ -403,8 +569,9 @@ hh.addEventListener("click", () => {
       play9.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9),rgba(0,0,0,0.9)),url("${cur.path}")`;
     }
   }
-  document.getElementById("range").addEventListener("change",(e)=>{
-      audio.currentTime=(range.value*audio.duration)/100;
+  document.getElementById("range").addEventListener("change",(e)=>{ 
+  //change audio according to range 
+      audio.currentTime=(range.value*audio.duration)/ 100000;
       
   });
   style.innerHTML = `#play9{
@@ -418,12 +585,16 @@ hh.addEventListener("click", () => {
     display:flex;
     flex-direction:column;
     align-items:center;
-    transition: all 0.5s linear 0s;
+    transition:all 0.3s linear;
 }
 #range{
-    margin-top:10%;
+    margin-top:5%;
     width:80%;
+    
+    accent-color:#86ff6a;
+    
 }
+
 
 #playimg{
    width: 120rem;
@@ -436,7 +607,7 @@ hh.addEventListener("click", () => {
 } 
  #tt{
  margin-top:15%;
-        color: white;
+        color: black;
         font-size:15rem;
     }
     #playingnows{
@@ -452,27 +623,42 @@ hh.addEventListener("click", () => {
         gap:10%;
         justify-content:center;
         margin-top:10%;
-        & img{
+        & button{
             height:25rem;
             width: 25rem;
-            background:grey;
             border-radius: 50%;
+             & img{
+                 height: 70%;
+             }
+            
+        }
+        & button:not(button:nth-child(2)){
+            background:transparent;
+            border-color:transparent;
         }
     }
 #play10{
     padding:2%;
 }
+#timing{
+    margin-top:3%;
+}
 #back{
-    height: 5%;
+    height: 15rem;
+    width:15rem;
     margin-top: 12%;
     background: grey;
     transform:rotate(-90deg);
     left:2%;
-    top:2%;
+    top:6%;
     border-radius: 50%;
     position:absolute;
+    & img{
+        height:100%;
+    }
 }`;
 });
+//reduce size of player
 let back = document.getElementById("back");
 back.addEventListener("click", () => {
   let play9 = document.getElementById("play9");
@@ -487,7 +673,7 @@ back.addEventListener("click", () => {
         width:100%;
         padding-left:3%;
         background:#85ff40;
-        transition: all 0.5s linear 0s;
+        transition:all 0.3s linear;
     }
     #playimg{
         height:17rem;
@@ -517,37 +703,58 @@ back.addEventListener("click", () => {
         font-size:3rem;
         color:white;
     }
+    
+     .btn1,.btn2,.btn3{
+        height:15rem;
+        background: transparent;
+        border-color:transparent;
+        width:15rem;
+        border-radius: 50%;
+        
+    }
     #buttons{
         height:100%;
-        display:flex; 
+        display:flex;.
         width:40%;
         justify-content:space-evenly;
         align-items:center;
         padding-right:2%;
+        & img{
+            height:100%;
+        }
+         & button:nth-child(2){
+            & img{
+                transform:scale(0.75);
+            }
+            }
     }
-    .btn1,.btn2,.btn3{
-        height:15rem;
-        width:15rem;
-    }`;
+  
+   `;
 });
 let btn2 = document.querySelector(".btn2");
+//pause btn
 btn2.addEventListener("click", () => {
   let playingnows = document.getElementById("playingnows");
   player(playingnows.innerText);
 });
+//next btn
 let btn3 = document.querySelector(".btn3");
 btn3.addEventListener("click", () => {
-  let playslist = JSON.parse(localStorage.getItem("curplay"));
 
+  let playslist = JSON.parse(localStorage.getItem("curplay"))|| "";
   let playnows = document.getElementById("playingnows");
+  console.log(playnows.innerText)
+  console.log(playslist)
   if (playslist.length - 1 > playslist.indexOf(`${playnows.innerText}`)) {
     next = playslist[playslist.indexOf(`${playnows.innerText}`) + 1];
   } else {
     next = playslist[0];
+   
   }
-  //next=playslist[playslist.indexOf(`${playnows.innerText}`)+1];
+ 
   player(next, playslist);
 });
+//previous btn
 let btn1 = document.querySelector(".btn1");
 btn1.addEventListener("click", () => {
   let playslist = JSON.parse(localStorage.getItem("curplay"));
@@ -561,64 +768,49 @@ btn1.addEventListener("click", () => {
   //next=playslist[playslist.indexOf(`${playnows.innerText}`)+1];
   player(next, playslist);
 });
-
-let play9 = document.getElementById("play9");
-let colours = "123456789ABCDEF";
-let code = 0;
-let direction = "";
-let colourCode = "";
-let clr1, clr2;
-let directions = [
-  "top",
-  "bottom",
-  "right",
-  "left",
-  "top right",
-  "top left",
-  "bottom left",
-  "bottom right",
-];
-function color() {
-  colourCode = "#";
-  for (let i = 0; i < 6; i++) {
-    code = Math.round(Math.random() * 14);
-    colourCode = colourCode + colours[code];
-  }
-  return colourCode;
-}
-
+//change range value according to audio current time
 audio.ontimeupdate = function () {
   let range = document.getElementById("range");
-  range.value = (audio.currentTime / audio.duration) * 100;
-  document.getElementById("timing").innerHTML = `${Math.round(
-    audio.currentTime
-  )}s/${(audio.duration / 60).toFixed(2)}s`;
+  range.value = (audio.currentTime / audio.duration) *100000;
+  let cursec=Math.floor(audio.currentTime%60);
+  let curmin=Math.floor(audio.currentTime/60);
+  let dursec=Math.floor(audio.duration%60);
+  let durmin=Math.floor(audio.duration/60);
+  document.getElementById("currentTime").innerHTML = `${String(curmin).padStart(2, '0')}:${String(cursec).padStart(2, '0')}`;
+  document.getElementById("durationTime").innerHTML = `${String(durmin).padStart(2, '0')}:${String(dursec).padStart(2, '0')}`;
 };
+//contact form
 function menu() {
   document.getElementById("menu").addEventListener("click", () => {
-    main.innerHTML = `<div id="contact"><h1>Contact</h1><form><h2>Enter Name</h2><input type="text" id="name" required><h2>Enter Email</h2><input type="email" id="email" required> <h2>Enter Message</h2><textarea name="message" rows="4" cols="60" id="message" required></textarea><button id="send">Send</button></form></div>`;
+    main.innerHTML = `<div id="contact"><h1>Contact</h1><form action="https://formspree.io/f/xgvwoage"
+  method="POST"><h2>Enter Name</h2><input type="text" id="name" placeholder="Enter Name" required name="name"><h2>Enter Email</h2><input type="email" id="email" placeholder="Enter Email" required name="email"> <h2>Enter Message</h2><textarea name="message" rows="4" cols="60" id="message" required placeholder="Enter The Message" name="message"></textarea><button id="send">Send</button></form></div>`;
   });
 }
 menu();
+//collection show
 favorite = document.getElementById("favorite");
 favorite.addEventListener("click", () => {
+nav.innerHTML = `<img src="${searchimg}" alt="search" id="search"><img src="./img/logo.webp" alt="logo" id="logo4"><div id="menu"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"></div>`;
+searchs();
+menu();
     favorite.src="./img/fplaylist.webp";
     discover.src="./img/discover.webp";
 home.src="./img/home.webp";
-
+profile.src="./img/profile.webp";
   document.getElementById("albsty").innerHTML = "";
   let collection = JSON.parse(localStorage.getItem("collection")) || [
     "Favorite",
   ];
+  //load collection contains all user made playlist and default favorite
   localStorage.setItem("collection", JSON.stringify(collection));
   let main = document.getElementById("main");
   main.innerHTML = `<div id="favoritetitle">My Playlists</div><div id="playlist6"></div>`;
+  //show all list front song img with play btn
   function load4() {
     playlist2 = document.getElementById("playlist6");
     let path;
     for (let cur of collection) {
       let z = JSON.parse(localStorage.getItem(cur));
-
       if (z.length != 0) {
         path = songs[z[0] - 1].path;
       } else {
@@ -632,7 +824,7 @@ home.src="./img/home.webp";
     }
     const div = document.createElement("div");
     div.classList.add("lastlist");
-    div.innerHTML = `<h1>+</h2>`;
+    div.innerHTML = `<h1>+</h1>`;
     playlist2.append(div);
     document.querySelector(".lastlist").addEventListener("click", () => {
       main.innerHTML = `<div id="favoritetitle">Favorite</div><div id="playlist6"></div><div id="popup"><h1>Enter Playlist Name</h1><input type="text" id="playname"><div id="btnsplay"><button id="cancel">Cancel</button><button id="create">Create</button></div></div>`;
@@ -642,7 +834,7 @@ home.src="./img/home.webp";
     playlistplay();
   }
   load4();
-
+//function to take new playlist name
   function load5() {
     document.querySelector(".lastlist").addEventListener("click", () => {
       main.innerHTML = `<div id="favoritetitle">Favorite</div><div id="playlist6"></div><div id="popup"><h1>Enter Playlist Name</h1><input type="text" id="playname"><div id="btnsplay"><button id="cancel">Cancel</button><button id="create">Create</button></div></div>`;
@@ -650,9 +842,9 @@ home.src="./img/home.webp";
       load6();
     });
   }
-
+//savingname to collection
   function load6() {
-    playname = document.getElementById("playname");
+   let  playname = document.getElementById("playname");
     document.getElementById("btnsplay").addEventListener("click", (e) => {
       if (e.target.id == "cancel") {
         main.innerHTML = `<div id="favoritetitle">Favorite</div><div id="playlist6"></div>`;
@@ -666,6 +858,7 @@ home.src="./img/home.webp";
 
           localStorage.setItem(zz, JSON.stringify(list10));
           main.innerHTML = `<div id="favoritetitle">Favorite</div><div id="playlist6"></div>`;
+          update_data();
           load4();
         } else {
           main.innerHTML = `<div id="favoritetitle">Favorite</div><div id="playlist6"></div><div id="popup"><h1>Enter Playlist Name</h1><input type="text" id="playname"><h1>Already Exist</h1><div id="btnsplay"><button id="cancel">Cancel</button><button id="create">Create</button></div></div>`;
@@ -675,7 +868,7 @@ home.src="./img/home.webp";
       }
     });
   }
-
+//to select playlist user clicked
   function playlistplay() {
     document.querySelector("#playlist6").addEventListener("click", (e) => {
       let mayplay = e.target.parentElement.id;
@@ -700,6 +893,7 @@ home.src="./img/home.webp";
   let count = 0;
   let playaudiopath = "";
   let imgpath = "";
+  //show list songs sequencingly
   function listshow(input, stid) {
     let listname = input;
     playlist2 = document.getElementById("playlist5");
@@ -709,7 +903,7 @@ home.src="./img/home.webp";
         if (fav1.includes(`${cur.id}`)) {
           fav = "liked.webp";
         } else {
-          fav = "heart.webp";
+          fav = heartimg;
         }
         if (count == 0) {
           playaudiopath = cur.spath;
@@ -728,7 +922,7 @@ home.src="./img/home.webp";
     if (stid == "colplay" && listname.length != 0) {
       player(playaudiopath, list4);
     }
-    imgpath = localStorage.getItem("imgpath");
+    imgpath = localStorage.getItem("imgpath")|| "./img/logo.webp";
     if (listname.length == 0) {
       imgpath = "./img/logo.webp";
     }
@@ -736,14 +930,15 @@ home.src="./img/home.webp";
     localStorage.setItem("imgpath", imgpath);
     document.getElementById(
       "intro"
-    ).innerHTML = `<img src="${imgpath}" id="introimg"><div id="below"><img src="./img/add.webp" id="addthe"><img src="./img/play.webp" id="playthe" data-play="${playaudiopath}" data-list='${JSON.stringify(
+    ).innerHTML = `<img src="${imgpath}" id="introimg"><div id="below"><img src="${addimg}" id="addthe"><img src="./img/play.webp" id="playthe" data-play="${playaudiopath}" data-list='${JSON.stringify(
       list4
-    )}'><img src="./img/remove.webp" id="removethe"></div>`;
+    )}'><img src="${removeimg}" id="removethe"></div>`;
     addremove();
   }
 });
 let listcont;
 let list4 = [];
+
 function addremove() {
   let btn10 = document.getElementById("below");
   btn10.addEventListener("click", (e) => {
@@ -758,12 +953,12 @@ function addremove() {
       let zzzz = JSON.parse(localStorage.getItem("mayplay"));
       listcont = JSON.parse(localStorage.getItem(zzzz));
       main.innerHTML = `<div id="favoritetitle">${zzzz}</div><div id="intro"></div><div id="playlist10"></div>`;
-      let imgpath = localStorage.getItem("imgpath");
+      let imgpath = localStorage.getItem("imgpath")|| "./img/logo.webp";
       playlist2 = document.getElementById("playlist10");
       for (let cur of songs) {
         if (listcont.includes(`${cur.id}`) || listcont.includes(cur.id)) {
         } else {
-          fav = "add.webp";
+          fav = imgt;
           const div = document.createElement("div");
           div.classList.add("list1");
           div.innerHTML = `<div id="cont"><div class="play2" id="${cur.id}"class="playing" data-spath="${cur.spath}"><img src="./img/play.webp" class="playing" id="${cur.id}" data-spath="${cur.spath}"></div><div id="sname"><h2>${cur.songname}</h2><h3>${cur.singer}</h3></div></div><div id="df"><div id="time">${cur.time}</div><div id="img8" ><img src="./img/${fav}" alt="${cur.alt}" id="${cur.id}" class="add"></div></div>`;
@@ -776,18 +971,18 @@ function addremove() {
       menu();
       document.getElementById(
         "intro"
-      ).innerHTML = `<img src="${imgpath}" id="introimg"><div id="below"><div id="editsearch"><input type="text" id="edits"><img src="./img/search.webp" id="edb"></div></div>`;
+      ).innerHTML = `<img src="${imgpath}" id="introimg"><div id="below"><div id="editsearch"><input type="text" id="edits"><img src="${searchimg}" id="edb"></div></div>`;
       edit(listcont);
       editthe(list4);
     } else if (e.target.id == "removethe") {
       let zzzz = JSON.parse(localStorage.getItem("mayplay"));
       listcont = JSON.parse(localStorage.getItem(zzzz));
       main.innerHTML = `<div id="favoritetitle">${zzzz}</div><div id="intro"></div><div id="playlist10"></div>`;
-      let imgpath = localStorage.getItem("imgpath");
+      let imgpath = localStorage.getItem("imgpath")|| "./img/logo.webp";
       playlist2 = document.getElementById("playlist10");
       for (let cur of songs) {
         if (listcont.includes(`${cur.id}`) || listcont.includes(cur.id)) {
-          fav = "remove.webp";
+          fav = imgt2;
           const div = document.createElement("div");
           div.classList.add("list1");
           div.innerHTML = `<div id="cont"><div class="play2" id="${cur.id}"class="playing" data-spath="${cur.spath}"><img src="./img/play.webp" class="playing" id="${cur.id}" data-spath="${cur.spath}"></div><div id="sname"><h2>${cur.songname}</h2><h3>${cur.singer}</h3></div></div><div id="df"><div id="time">${cur.time}</div><div id="img8" ><img src="./img/${fav}" alt="${cur.alt}" id="${cur.id}" class="remove"></div></div>`;
@@ -798,9 +993,7 @@ function addremove() {
       }
       searchs();
       menu();
-      document.getElementById(
-        "intro"
-      ).innerHTML = `<img src="${imgpath}" id="introimg"><div id="below"><div id="editsearch"><input type="text" id="edits"><img src="./img/search.webp" id="edb"></div></div>`;
+      document.getElementById("intro").innerHTML = `<img src="${imgpath}" id="introimg"><div id="below"><div id="editsearch"><input type="text" id="edits"><img src="${searchimg}" id="edb"></div></div>`;
       edit1(listcont);
       editthe(list4);
     }
@@ -808,6 +1001,7 @@ function addremove() {
 }
 
 let val;
+//function to show song not in playlist to add playlist
 function edit(val) {
   let listname = val;
   let search = document.getElementById("editsearch");
@@ -825,17 +1019,17 @@ function edit(val) {
             )
           ) {
             if (!listname.includes(`${cur.id}`) && !listname.includes(cur.id)) {
-              fav = "add.webp";
+              fav = imgt;
               const div = document.createElement("div");
               div.classList.add("list1");
-              div.innerHTML = `<div id="cont"><div class="play2" id="${cur.id}"class="playing" data-spath="${cur.spath}"><img src="./img/play.webp" class="playing" id="${cur.id}" data-spath="${cur.spath}"></div><div id="sname"><h2>${cur.songname}</h2><h3>${cur.singer}</h3></div></div><div id="df"><div id="time">{cur.time}</div><div id="img8" ><img src="./img/${fav}" alt="${cur.alt}" id="${cur.id}" class="add"></div></div>`;
+              div.innerHTML = `<div id="cont"><div class="play2" id="${cur.id}"class="playing" data-spath="${cur.spath}"><img src="./img/play.webp" class="playing" id="${cur.id}" data-spath="${cur.spath}"></div><div id="sname"><h2>${cur.songname}</h2><h3>${cur.singer}</h3></div></div><div id="df"><div id="time">${cur.time}</div><div id="img8" ><img src="./img/${fav}" alt="${cur.alt}" id="${cur.id}" class="add"></div></div>`;
               searchresult.append(div);
               list4.push(cur.spath);
             }
           }
         } else {
           if (!listname.includes(`${cur.id}`) && !listname.includes(cur.id)) {
-            fav = "add.webp";
+            fav = imgt;
             const div = document.createElement("div");
             div.classList.add("list1");
             div.innerHTML = `<div id="cont"><div class="play2" id="${cur.id}"class="playing" data-spath="${cur.spath}"><img src="./img/play.webp" class="playing" id="${cur.id}" data-spath="${cur.spath}"></div><div id="sname"><h2>${cur.songname}</h2><h3>${cur.singer}</h3></div></div><div id="df"><div id="time">${cur.time}</div><div id="img8" ><img src="./img/${fav}" alt="${cur.alt}" id="${cur.id}" class="add"></div></div>`;
@@ -848,7 +1042,7 @@ function edit(val) {
     searchbox.addEventListener("keyup", handle1);
   });
 }
-// let val;
+// list to show song present in list to remove
 function edit1(val) {
   let listname = val;
   let search = document.getElementById("editsearch");
@@ -866,7 +1060,7 @@ function edit1(val) {
             )
           ) {
             if (listname.includes(`${cur.id}`) || listname.includes(cur.id)) {
-              fav = "remove.webp";
+              fav = imgt2;
               const div = document.createElement("div");
               div.classList.add("list1");
               div.innerHTML = `<div id="cont"><div class="play2" id="${cur.id}"class="playing" data-spath="${cur.spath}"><img src="./img/play.webp" class="playing" id="${cur.id}" data-spath="${cur.spath}"></div><div id="sname"><h2>${cur.songname}</h2><h3>${cur.singer}</h3></div></div><div id="df"><div id="time">${cur.time}</div><div id="img8" ><img src="./img/${fav}" alt="${cur.alt}" id="${cur.id}" class="remove"></div></div>`;
@@ -876,7 +1070,7 @@ function edit1(val) {
           }
         } else {
           if (listname.includes(`${cur.id}`) || listname.includes(cur.id)) {
-            fav = "remove.webp";
+            fav = imgt2;
             const div = document.createElement("div");
             div.classList.add("list1");
             div.innerHTML = `<div id="cont"><div class="play2" id="${cur.id}"class="playing" data-spath="${cur.spath}"><img src="./img/play.webp" class="playing" id="${cur.id}" data-spath="${cur.spath}"></div><div id="sname"><h2>${cur.songname}</h2><h3>${cur.singer}</h3></div></div><div id="df"><div id="time">${cur.time}</div><div id="img8" ><img src="./img/${fav}" alt="${cur.alt}" id="${cur.id}" class="remove"></div></div>`;
@@ -888,8 +1082,10 @@ function edit1(val) {
     };
     searchbox.addEventListener("keyup", handle1);
   });
+  
 }
 let col;
+//function to add or remove song
 function editthe(col) {
   let playlist10 = document.getElementById("playlist10");
   playlist10.addEventListener("click", (e) => {
@@ -897,24 +1093,27 @@ function editthe(col) {
       player(e.target.getAttribute("data-spath"), col);
     } else if (e.target.className == "add") {
       let listcol = document.getElementById("favoritetitle").innerText;
-      let st = JSON.parse(localStorage.getItem(listcol));
+      let st = JSON.parse(localStorage.getItem(listcol))|| [];
       st.push(e.target.id);
       st = [...new Set(st)];
-      e.target.src = "./img/fadd.webp";
+      console.log("eer");
+      console.log(faddimg);
+      e.target.src = faddimg;
       localStorage.setItem(listcol, JSON.stringify(st));
+      update_data();
     } else if (e.target.className == "remove") {
       let listcol = document.getElementById("favoritetitle").innerText;
-      let st = JSON.parse(localStorage.getItem(listcol));
+      let st = JSON.parse(localStorage.getItem(listcol))|| [];
       st = st.filter((cur) => {
         return cur != e.target.id;
       });
       st = [...new Set(st)];
       localStorage.setItem(listcol, JSON.stringify(st));
-      e.target.src = "./img/fremove.webp";
+      e.target.src = fremove;
       console.log(st.length);
 
       if (st.length == 0 && listcol != "Favorite") {
-        let collection = JSON.parse(localStorage.getItem("collection"));
+        let collection = JSON.parse(localStorage.getItem("collection"))|| [];
 
         collection = collection.filter((cur) => {
           return cur != listcol;
@@ -922,6 +1121,39 @@ function editthe(col) {
         localStorage.removeItem(listcol);
         localStorage.setItem("collection", JSON.stringify(collection));
       }
-    }
+    }update_data();
   });
+}
+//function for profile 
+let profile=document.getElementById("profile");
+profile.addEventListener("click",()=>{
+//console.log(JSON.parse(user.collection).favorite[2]);
+    profile.src="./img/fprofile.webp";
+    discover.src="./img/discover.webp";
+    home.src="./img/home.webp";
+    favorite.src="./img/playlist.webp";
+    nav.innerHTML = `<img src="${searchimg}" alt="search" id="search"><img src="./img/logo.webp" alt="logo" id="logo4"><div id="menu"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"></div>`;
+    searchs();
+    menu();
+    main.innerHTML=`<div id="profile_content"><img src="${user.profile_picture}" alt="profile" id="profile_picture"><h2 id="user_email">${user.email}</h2><h1 id="user_name">${user.name}</h1><button id="theme1"><img src="./img/sun.webp" id="change"></button><img src="./img/show.webp" id="show"><button id="Signout">SignOut</button></div><div id="developer">Developed By @Atul</div>`;
+    
+    document.getElementById("Signout").addEventListener("click",()=>{signout()});
+    document.getElementById("change").addEventListener("click",()=>{ if(color1=="black"){
+        theme1("white");
+        document.getElementById("change").src="./img/moon.webp";
+        color1="white";
+        
+        }
+        else{
+            theme1("black");
+            document.getElementById("change").src="./img/sun.webp"
+            color1="black";
+        }
+        nav.innerHTML = `<img src="${searchimg}" alt="search" id="search"><img src="./img/logo.webp" alt="logo" id="logo4"><div id="menu"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"></div>`;
+    });
+});
+const signout=()=>{
+    localStorage.setItem("user-info",JSON.stringify(""));
+    window.location.assign("index.html");
+    
 }

@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Page title</title>
+    <title>Spotify</title>
+    <link rel="icon" type="image/webp" href="./img/logo.webp">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Spotify is a digital music service that gives you access to millions of songs and podcasts from creators all over the world.">
+    <meta name="keywords" content="Spotify, Music, Music Streaming, Music Streaming Service, Music Streaming Service Provider">
+    <meta name="author " content="Atul Jadhav">
     <link rel="stylesheet" href="./css/mainstyle.css">
 </head>
-<body>  
+<style id="theme">
+        
+    </style>
+<body id="body">  
     <nav id="nav">
         
     </nav>
@@ -13,7 +21,7 @@
         </main>    
         <div id="space"></div>
         <div id="play9">
-            <img src="./img/left.webp" alt="" id="back">
+           <button id="back"> <img src="./img/left.webp" alt="" ></button>
             <h1 id="tt">Playing</h1>
             <div id="hh">
                 <img src="./img/bg1.webp" alt="" id="playimg">
@@ -22,12 +30,14 @@
                     <h2 id="playingsongs">Afhirvj hffhj</h2>
                  </div>
             </div>
-            <h3 id="timing"></h3>
-            <input type="range" value=0 max=100 id="range">
+          
+            <input type="range" value=0  max=100000 id="range">
+              <div id="timing"><div id="currentTime"></div><div id="durationTime"></div></div>
             <div id="buttons">
-                <img src="./img/previous.webp" alt="" class="btn1">
-                <img src="./img/play.webp" alt="" id="play10" class="btn2">
-                <img src="./img/next.webp" alt="" class="btn3">
+                <button class="btn1">
+                <img src="./img/previous.webp" alt=""></button>
+                <button class="btn2" id="play10">  <img src="./img/play.webp" alt=""  id="pc"></button>
+                <button class="btn3">  <img src="./img/next.webp" alt="" ></button>
              </div>
         </div>
     <footer>        
@@ -47,7 +57,7 @@
         width:100%;
         padding-left:3%;
         background:#85ff40;
-        transition: all 0.5s linear 0s;
+        
     }
     #range{
         display:none;
@@ -81,6 +91,14 @@
         color:white;
         
     }
+     .btn1,.btn2,.btn3{
+        height:15rem;
+        background: transparent;
+        border-color:transparent;
+        width:15rem;
+        border-radius: 50%;
+        
+    }
     #buttons{
         height:100%;
         display:flex;.
@@ -88,17 +106,21 @@
         justify-content:space-evenly;
         align-items:center;
         padding-right:2%;
+        & img{
+            height:100%;
+        }
+         & button:nth-child(2){
+            & img{
+                transform:scale(0.75);
+            }
+            }
     }
-    .btn1,.btn2,.btn3{
-        height:15rem;
-        width:15rem;
-    }
+   
+
     </style>
    
-    <script src="./js/mainscript.js" ></script>
-    <script>
-        //localStorage.setItem("current",JSON.stringify(""));
-    </script>
+    <script src="./js/mainscript.js" type="module" ></script>
+    
     <style id="albsty">
         
     </style>
