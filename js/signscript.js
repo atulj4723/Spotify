@@ -134,17 +134,19 @@ google.addEventListener("click",()=>{
     const user = result.user;
    
           get(child(dbref, "UsersAuthList/" + user.uid)).then((snapshot) => {
-  if (snapshot.exists) {
+  if (snapshot.exists()) {
     localStorage.setItem("user-info",JSON.stringify(user.uid)); 
+      alert("signin");
     signOut(auth);
     window.location.assign("main.html");
   } else {
+      alert("register")
    let col={Favorite:[],};
     let collection=JSON.stringify(col);
          set(ref(db, 'UsersAuthList/' + user.uid),{
                 name: user.displayName, 
                 email: user.email, 
-                profile_picture:user.photoURL, 
+                profile_picture: user.photoURL, 
                 collection: collection, 
                                          
             });
