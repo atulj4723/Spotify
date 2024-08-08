@@ -1,6 +1,6 @@
  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
   import { getDatabase, set, ref, get, child} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup, signOut} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup, onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js";
   
 const firebaseConfig = {
@@ -25,7 +25,7 @@ left.addEventListener("click",()=>{
     history.back();
 });
 let color = JSON.parse(localStorage.getItem("color"))|| "black";
-let google=document.getElementById("google");
+let google=document.getElementById("op");
 document.body.style.backgroundColor=color;
 let head=document.getElementById("head");
 let inputs=document.getElementById("inputs");
@@ -35,32 +35,39 @@ let change=document.getElementById("change");
 let fun=JSON.parse(localStorage.getItem("fun")) || "register";
 let or=document.getElementById("or");
 //set  theme
+let open="./img/whiteeyeopen.webp";
+let close="./img/whiteeyeclose.webp";
 if(color=="white"){
     head.style.color="black";
     or.style.color="black";
     opt.style.color="black";
-    
+    open="./img/blackeyeopen.webp";
+    close="./img/blackeyeclose.webp";
 }
 //change main contain for register or signin
 call();
+function stop() {
+    document.getElementById("error").innerText="";
+}
 function call(){
 if(fun=="register") { 
 document.getElementById("logo3").style.marginBottom="-7rem";
 head.innerText="Register";
-inputs.innerHTML=`<input type="text" id="name" placeholder="Enter name" required autocomplte="on"><input type="email" id="email" placeholder="Enter email" required autocomplte="on"><input type="password" id="password" placeholder="Enter password" required autocomplte="on">`;
+inputs.innerHTML=`<input type="text" id="name" placeholder="Enter name" required autocomplte="on"><input type="email" id="email" placeholder="Enter email" required autocomplte="on"><div id="pass"><input type="password" id="password" placeholder="Enter password" required autocomplte="on"><img src="${close}" id="eye"></div>`;
 btn5.innerText="Register";
 opt.innerText="Do you have an account ? ";
 change.innerText=" Sign In";
 google.setAttribute("data-option","register");
+ps();
 }else if(fun=="signin"){
 document.getElementById("logo3").style.marginBottom="17rem";
     head.innerText="Sign In";
-inputs.innerHTML=`<input type="email" id="email" placeholder="Enter email" required autocomplte="on"><input type="password" id="password" placeholder="Enter password" required autocomplte="on">`;
+inputs.innerHTML=`<input type="email" id="email" placeholder="Enter email" required autocomplte="on"><div id="pass"><input type="password" id="password" placeholder="Enter password" required autocomplte="on"><img src="${close}" id="eye"></div>`;
 btn5.innerText="Sign In";
 google.setAttribute("data-option","signin");
 opt.innerText="Not A Member?";
 change.innerText=" Register Now";
-
+ps();
 }
 let email1=document.getElementById("email");
 let password1=document.getElementById("password");
@@ -90,8 +97,11 @@ e.preventDefault();
             })
         }).catch((error)=>{
         // display error
-           document.getElementById("error").innerText=error.code;
-        })
+          let e=error.code;
+          document.getElementById("error").innerText=e.slice(5);
+           setTimeout(stop,2000);
+        });
+       
     }else if(fun=="register"){
     let email=document.getElementById("email").value;
     let password=document.getElementById("password").value;
@@ -104,15 +114,16 @@ e.preventDefault();
             set(ref(db, 'UsersAuthList/' + credentials.user.uid),{
                 name: name, 
                 email:email, 
-                profile_picture:"./img/profile.webp", 
                 collection: collection, 
                 
             });
             localStorage.setItem("user-info",JSON.stringify( credentials.user.uid));
             window.location.assign("main.html");
         }).catch((error)=>{
+           let e=error.code;
+           document.getElementById("error").innerText= e.slice(5);
+           setTimeout(stop,2000);
            
-           document.getElementById("error").innerText= error.code;
         })
     }
 });
@@ -130,25 +141,23 @@ google.addEventListener("click",()=>{
    
         signInWithPopup(auth, provider).then((result) => {
  const credential=GoogleAuthProvider.credentialFromResult(result);
- const token=credential.accessToken;
+    const token = credential.accessToken;
     const user = result.user;
    
           get(child(dbref, "UsersAuthList/" + user.uid)).then((snapshot) => {
-  if (snapshot.exists()) {
+  if (snapshot.exists) {
+    const user1=snapshot.val();
     localStorage.setItem("user-info",JSON.stringify(user.uid)); 
-      alert("signin");
     signOut(auth);
     window.location.assign("main.html");
   } else {
-      alert("register")
    let col={Favorite:[],};
     let collection=JSON.stringify(col);
          set(ref(db, 'UsersAuthList/' + user.uid),{
                 name: user.displayName, 
                 email: user.email, 
-                profile_picture: user.photoURL, 
                 collection: collection, 
-                                         
+                                                
             });
          localStorage.setItem("user-info",JSON.stringify(user.uid)); 
      //move to main page
@@ -168,9 +177,21 @@ google.addEventListener("click",()=>{
     const email1 = error.customData.email;
     const credential =GoogleAuthProvider.credentialFromError(error);
     alert(errorMessage);
-    document.getElementById("error").innerText=errorCode;
+    document.getElementById("error").innerText=errorCode.slice(5);
+    setTimeout(stop,2000)
   });
   
  
 });
-
+function ps() {
+let passshow=document.getElementById("password");
+let eye=document.getElementById("eye");
+eye.addEventListener("click",()=>{
+    if(passshow.type=="password") {
+        password.type="text";
+        eye.src=open;
+    }else{
+        password.type="password";
+        eye.src=close;
+    }
+});}
