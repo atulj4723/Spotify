@@ -12,6 +12,9 @@ body {
     width: 100vw;
     color: white;
     position: relative;
+    &::-webkit-scrollbar {
+        display: none;
+      }
 }
 #nav {
     display: flex;
@@ -65,6 +68,9 @@ body {
     overflow-x: scroll;
     display: flex;
     gap: 1rem;
+    &::-webkit-scrollbar {
+        display: none;
+      }
 }
 #imgsec {
     position: relative;
