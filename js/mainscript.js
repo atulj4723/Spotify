@@ -100,7 +100,7 @@ const theme1 = color2 => {
     let theme = document.getElementById("theme");
     //change text color
     theme.innerHTML = `#body{background:white;}
-    #stitle{
+    #stitle,#message{
         color:black;
     }
     #sname{
@@ -110,6 +110,8 @@ const theme1 = color2 => {
     }
     #contact{
         color:black;
+        & input{
+        color:black;}
     }
     .child{
         & h2{
@@ -1107,6 +1109,8 @@ profile.addEventListener("click", () => {
       color1 = "black";
     }
     nav.innerHTML = `<img src="${searchimg}" alt="search" id="search"><img src="./img/logo.webp" alt="logo" id="logo4"><div id="menu"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"><img src="${circleimg}" alt="circle"></div>`;
+    searchs();
+    menu();
   });
 });
 const signout = () => {
