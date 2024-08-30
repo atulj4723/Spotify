@@ -2,7 +2,7 @@
   import { getDatabase, set, ref, get, child} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup, onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js";
-  
+
 const firebaseConfig = {
   apiKey: "AIzaSyDBq87GBZd6hJ5c-RblvFMDKtVZDE0kHPw",
   authDomain: "beat-db665.firebaseapp.com",
@@ -51,7 +51,6 @@ function stop() {
 }
 function call(){
 if(fun=="register") { 
-document.getElementById("logo3").style.marginBottom="-7rem";
 head.innerText="Register";
 inputs.innerHTML=`<input type="text" id="name" placeholder="Enter name" required autocomplte="on"><input type="email" id="email" placeholder="Enter email" required autocomplte="on"><div id="pass"><input type="password" id="password" placeholder="Enter password" required autocomplte="on"><img src="${close}" id="eye"></div>`;
 btn5.innerText="Register";
@@ -60,7 +59,6 @@ change.innerText=" Sign In";
 google.setAttribute("data-option","register");
 ps();
 }else if(fun=="signin"){
-document.getElementById("logo3").style.marginBottom="17rem";
     head.innerText="Sign In";
 inputs.innerHTML=`<input type="email" id="email" placeholder="Enter email" required autocomplte="on"><div id="pass"><input type="password" id="password" placeholder="Enter password" required autocomplte="on"><img src="${close}" id="eye"></div>`;
 btn5.innerText="Sign In";
@@ -101,7 +99,7 @@ e.preventDefault();
           document.getElementById("error").innerText=e.slice(5);
            setTimeout(stop,2000);
         });
-       
+
     }else if(fun=="register"){
     let email=document.getElementById("email").value;
     let password=document.getElementById("password").value;
@@ -115,7 +113,7 @@ e.preventDefault();
                 name: name, 
                 email:email, 
                 collection: collection, 
-                
+
             });
             localStorage.setItem("user-info",JSON.stringify( credentials.user.uid));
             window.location.assign("main.html");
@@ -123,7 +121,7 @@ e.preventDefault();
            let e=error.code;
            document.getElementById("error").innerText= e.slice(5);
            setTimeout(stop,2000);
-           
+
         })
     }
 });
@@ -138,38 +136,38 @@ change.addEventListener("click",()=>{
 });
 
 google.addEventListener("click",()=>{
-   
+
         signInWithPopup(auth, provider).then((result) => {
  const credential=GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
     const user = result.user;
-   
+
           get(child(dbref, "UsersAuthList/" + user.uid)).then((snapshot) => {
-  if (snapshot.exists) {
+if (snapshot.exists) {
     const user1=snapshot.val();
     localStorage.setItem("user-info",JSON.stringify(user.uid)); 
     signOut(auth);
     window.location.assign("main.html");
-  } else {
-   let col={Favorite:[],};
+} else {
+let col={Favorite:[],};
     let collection=JSON.stringify(col);
          set(ref(db, 'UsersAuthList/' + user.uid),{
                 name: user.displayName, 
                 email: user.email, 
                 collection: collection, 
-                                                
+
             });
          localStorage.setItem("user-info",JSON.stringify(user.uid)); 
      //move to main page
      signOut(auth);
                     window.location.assign("main.html");
-  }
+}
 }).catch((error) => {
-  alert(error);
+alert(error);
 });    
-   
-         
-   
+
+
+
   }).catch((error) => {
 
     const errorCode = error.code;
@@ -180,8 +178,8 @@ google.addEventListener("click",()=>{
     document.getElementById("error").innerText=errorCode.slice(5);
     setTimeout(stop,2000)
   });
-  
- 
+
+
 });
 function ps() {
 let passshow=document.getElementById("password");

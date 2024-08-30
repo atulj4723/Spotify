@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+   <meta charset="UTF-8">
     <title>Spotify</title>
     <link rel="icon" type="image/webp" href="./img/logo.webp">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +14,7 @@
         
     </style>
 <body id="body">  
+
     <nav id="nav">
         
     </nav>
@@ -21,9 +22,9 @@
         </main>    
         <div id="space"></div>
         <div id="play9">
-           <button id="back"> <img src="./img/left.webp" alt="" ></button>
+           <button id="back"> <img src="./img/left.webp" alt="not" ></button>
             <h1 id="tt">Playing</h1>
-            <div id="hh">
+            <div id="hh"> 
                 <img src="./img/bg1.webp" alt="" id="playimg">
                 <div id="playingnow">
                     <h1 id="playingnows">Tere sang yara</h1>
@@ -47,76 +48,7 @@
         <img src="./img/profile.webp" alt="profile" id="profile">
     </footer>
     <style id="style">
-    #play9{
-        display:flex;
-        position:fixed;
-        bottom:8%;
-        justify-content:space-between;
-        height:10%;
-        align-items:center;
-        width:100%;
-        padding-left:3%;
-        background:#85ff40;
-        
-    }
-    #range{
-        display:none;
-    }
-    #playimg{
-        height:17rem;
-        border-radius:50%;
-        width:17rem;
-        animation:rotate 4s linear infinite;
-    }
-    #back, #tt{
-        display:none;
-    }
-    #timing{
-        display:none
-    }
-    #hh{
-        display:flex;
-        align-items:center;
-        gap:3%;
-        width:60%;
-    }
-    @keyframes rotate{
-        100%{
-            rotate:-360deg;
-        }
-        
-    }
-    #playingnow{
-        font-size:3rem;
-        color:white;
-        
-    }
-     .btn1,.btn2,.btn3{
-        height:15rem;
-        background: transparent;
-        border-color:transparent;
-        width:15rem;
-        border-radius: 50%;
-        
-    }
-    #buttons{
-        height:100%;
-        display:flex;.
-        width:40%;
-        justify-content:space-evenly;
-        align-items:center;
-        padding-right:2%;
-        & img{
-            height:100%;
-        }
-         & button:nth-child(2){
-            & img{
-                transform:scale(0.75);
-            }
-            }
-    }
-   
-
+    
     </style>
    
     <script src="./js/mainscript.js" type="module" ></script>

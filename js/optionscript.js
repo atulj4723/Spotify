@@ -14,14 +14,14 @@ btn3.addEventListener("click",()=>{
     btn3.style.backgroundColor="green";
     btn3.style.color="white";
     localStorage.setItem("fun",JSON.stringify("register"));
-     btn4.style.backgroundColor= "transparent";
+     btn3.style.backgroundColor= "transparent";
 });
 btn4.addEventListener("click",()=>{
 window.location.assign("sign.html")
     btn4.style.backgroundColor="green";
    btn4.style.color="white";
    localStorage.setItem("fun",JSON.stringify("signin"));
-    btn3.style.backgroundColor= "transparent";
+    btn4.style.backgroundColor= "transparent";
 });}
 setInterval(call, 1000);
 let left=document.getElementById("left");

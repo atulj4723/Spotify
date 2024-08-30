@@ -1,82 +1,94 @@
-*{
-    padding:0;
-    margin:0;
+
+* {
+    padding: 0;
+    margin: 0;
 }
-html{
-    font-size:62.5%;
+#lhhhg {
+    width: 100vw;
+    height: 100vh;
 }
- #lg{
-   background: #1e243c;
-     height: 100vh;
-     width: 100vw;
-    position:relative;
-    overflow:hidden;
-     }
+#ef1,
+#ef2,
+#ef3,
+#left {
+    position: absolute;
+    max-width: 100%;
+}
 #content1 {
-z-index:1;
-height: 150vh;
-width: 150vw;
-position:relative;
-    display:flex;
-    flex-direction:column;
-    gap:5rem;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+}
+#logo2 {
+    height: 5rem;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+#left {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    background: transparent;
+    top: 2%;
+    left: 5%;
+    border: 0;
+    & img {
+        height: 70%;
+        width: 70%;
+    }
+}
+#ef1,
+#ef2 {
+    width: 20rem;
+}
+#ef3,
+#ef2 {
+    bottom: 0;
 }
 #ef2 {
-position:absolute;
-right:0%;
-    bottom: 0%;
+    right: 0;
+    bottom: -2%;
 }
-#ef3{
-    position:absolute;
-    bottom:0%;
-    height:50%;
-    left:-5%;
+#ef1 {
+    transform: rotate(-80deg);
+    width: 20rem;
+    height: 20rem;
+    top: -5%;
+    right: -5%;
 }
-#ef1{
-    position:absolute;
-    top: -10%;
-    right: -20rem;
-    transform:rotate(-90deg);
+#ef3 {
+    width: 21rem;
 }
-#left{
+#ef2 {
+    width: 13rem;
+}
+#btns {
     position: absolute;
-    top:5%;
-    left:5%;
-    background: grey;
-    transform:scale(1.5);
-    border-radius:50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 10%;
+    & button {
+        height: 4rem;
+        width: 8rem;
+        border-radius: 1rem;
+        background: green;
+        color: white;
+        font-weight: 800;
+        border: 0;
+        font-size: 1rem;
+    }
 }
-#logo2{
-    position: absolute;
-    top:10%;
-}
-#hs1{
-    color:white;
-    font-size:9rem;
-    margin-top:-30%;
-}
-#hs2{
-    color:grey;
-    font-size:7rem;
-    z-index:2;
-    text-align:center;
-}
-#btn3,#btn4{
-    height:25rem;
-    width: 50rem;
-    background: transparent;
-    border-radius:10rem;
-    font-size:8rem;
-    font-weight:900;
-    color:white;
-    border-color:grey;
-}
-#btns{
-width:100%;
-margin-top:10%;
-    display:flex;
-    justify-content:space-around;
+@media (width>421px) {
+    #btns {
+      gap: 30%;
+        & button {
+            width: 10rem;
+            height: 5rem;
+        }
+    }
 }

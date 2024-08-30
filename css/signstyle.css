@@ -1,134 +1,142 @@
-*{
-    padding:0;
-    margin:0;
-}
-html{
-    font-size:62.5%;
-}
-#left{
+#left {
     position: absolute;
-    top:5%;
-    left:5%;
-    background: grey;
-    transform:scale(0.8);
-    border-radius:50%;
-}
-#logo3{
-    transform:scale(0.6);
-    
-    margin-bottom: 17rem;
-}
-body {
-   height: 100vh;
-   width: 100vw;
-}
-#head{color:white;
-font-size:8rem;}
-#head2{color:grey;
-font-size:5rem;}
-#href{
-    color:green;
+    left: 2%;
+    top: 2%;
+    height: 4rem;
 }
 #content2 {
-height:100%;
-    display:flex;
-    flex-direction:column;
-    gap:6rem;
-    align-items:center;
-    justify-content:center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
 }
-#inputs{
-    display:flex;
-    gap:6rem;
-    flex-direction:column;
+
+#head {
+    margin-top: 8rem;
+    text-align: center;
 }
-#email,#name,#password{
-    height:8rem;
-    width: 70rem;
-    padding:2rem;
-    font-size:6rem;
-    border-radius:10rem;
-    color:white;
-    background:transparent;
-    border-color:grey;
-}
-#btn5{
-    background: green;
-    color:white;
-    text-align:center;
-    height:15rem;
-    width: 50rem;
-    margin-top:10%;
-    font-size:7rem;
-    font-weight:900;
-    border-radius: 10rem;
-}
-#last{
-    color:white;
-    display:flex;
-    font-size:5rem;
-    align-items:center;
-    justify-content:center;
-}
-#form{
-    display:flex;
-    flex-direction:column;    
-    align-items:center;
-    justify-content:center;
-}
-#or{
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:1rem;
-    & img {
-        width:30%;
-    }
-    & h3{
-        font-size:5rem;
+#head2 {
+    text-align: center;
+    & span {
+        color: green;
     }
 }
-#right{
-    transform:rotate(180deg);
-}
-#op{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:5rem;
-    background: #408cff;
-    padding:2rem;
-   
-    border-radius:10rem;
-    border:0.5rem solid white;
-    & span{
+#inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    & input {
+        max-width: 70%;
+        margin: 0 auto;
+        border-radius: 1rem;
+        padding: 1rem;
+        font-size: 1.5rem;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        border-bottom: 1px solid grey;
         color: white;
-        font-size:5rem;
     }
-    & img{
+    & #pass {
+        max-width: 100%;
+        margin: 0 auto;
+        position: relative;
+        display: grid;
+        place-items: center;
+        & input {
+            max-width: 80%;
+        }
+        & img {
+            height: 2rem;
+            position: absolute;
+            top: 50%;
+            right: 15%;
+            transform: translate(0, -50%);
+        }
+    }
+}
+@media (width>450px) {
+    #pass {
+        max-width: 100%;
+        & input {
+            min-width: 100%;
+        }
+    }
+}
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    & button {
+        background: green;
+        width: 8rem;
+        height: 3rem;
+        margin: 0 auto;
+        border: 0;
+        border-radius: 1rem;
+        color: white;
+        font-size: 1rem;
+        font-weight: 800;
+        margin-top: 2rem;
+    }
+}
+#logo3 {
+    height: 6rem;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+}
+#or {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    gap: 1rem;
+    & img {
+        max-width: 40%;
+        height: 5px;
+    }
+    & #right {
+        transform: rotate(180deg);
+    }
+}
+#op {
+    display: flex;
+    margin: 0 auto;
+    background: #408cff;
+    justify-content: center;
+    border: 0.2rem solid white;
+    align-items: center;
+    border-radius: 4rem;
+    max-width: 60%;
+    gap: 1rem;
+    padding: 0.2rem;
+    & span {
+        font-size: 1rem;
+    }
+    & img {
+        height: 3.5rem;
         background: white;
-        padding:1rem;
         border-radius: 50%;
+        padding: 0.2rem;
     }
 }
-#change{
-    margin-left:1rem ;
-    color:blue;
+#last {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    & span {
+        color: blue;
+    }
 }
-#error{
-    color:red;
-    margin-top:2rem;
-    font-size:4rem;
-}
-#pass{
-    position: relative;
-}
-#eye{
-    position:absolute;
-    height: 7rem;
-    top:50%;
-    right:5%;
-    width: 7rem;
-    transform:translate(0,-50%)
+#error {
+    color: red;
+    font-size: 1.5rem;
+    text-align: center;
 }
