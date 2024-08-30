@@ -1,3 +1,5 @@
+/** @format */
+
 let list1;
 let inp = JSON.parse(localStorage.getItem("user-info")) || "";
 if (inp == "") {
@@ -637,6 +639,12 @@ hh.addEventListener("click", () => {
     width:60%;
     justify-content:space-evenly;
   }
+  @media (width>580px) {
+  #play9{
+  }
+  #hh img{
+  height:25vmax;
+  width:25vmax;}}
 `;
 });
 //reduce size of player
@@ -1104,4 +1112,4 @@ profile.addEventListener("click", () => {
 const signout = () => {
   localStorage.setItem("user-info", JSON.stringify(""));
   window.location.assign("index.html");
-};
+}

@@ -1,4 +1,6 @@
-*{
+/** @format */
+
+* {
     padding: 0%;
     margin: 0%;
     --background: #86ff6a;
@@ -446,27 +448,4 @@ form {
     font-weight: 900;
     border: 0;
     border-radius: 3rem;
-}
-@media (width>450px) {
-    #play9 {
-        max-width: 50%;
-        left: 50%;
-        transform: translate(-50%, 0);
-    }
-    #cont {
-        width: 70%;
-    }
-    #sname {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        gap-left: 3rem;
-        gap-right: 3rem;
-        align-items: center;
-        text-align: center;
-    }
-    #df {
-        width: 30%;
-        justify-content: space-around;
-    }
 }
