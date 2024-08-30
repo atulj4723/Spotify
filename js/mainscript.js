@@ -104,7 +104,7 @@ const theme1 = color2 => {
         color:black;
     }
     #sname{
-        & h2{
+        & h2,h3{
             color:black;
         }
     }
@@ -124,7 +124,7 @@ const theme1 = color2 => {
     #see{
         color:transparent;
     }
-    #play1,#dtitle,#dmtitle,#albname{
+    #play1,#dtitle,#dmtitle,#albname,#time{
         color:black;
     }
     #favoritetitle{
